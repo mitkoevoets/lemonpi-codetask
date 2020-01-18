@@ -7,7 +7,7 @@ import { Breadcrumb } from 'app/components/BreadCrumb';
 import { SideBar } from 'app/components/Sidebar';
 import { TopBar } from 'app/components/TopBar';
 import { withRouter } from 'react-router';
-import { DashboardContainer } from 'app/containers';
+import { AdvertisersContainer, DashboardContainer } from 'app/containers';
 
 const BreadCrumbWithRouter = withRouter(Breadcrumb);
 
@@ -27,10 +27,8 @@ export const App = hot(module)(() => (
 
       <div className="layout-content">
         <Switch>
-          {/*<Route exact path={routes.login} component={LoginContainer} />*/}
-          {/*<Route exact path={routes.logout} component={LogoutContainer} />*/}
-
           <Route exact={true} path={routes.dashboard} component={DashboardContainer}/>
+          <Route exact={true} path={routes.advertisers} component={AdvertisersContainer}/>
 
           <Route render={() => <h1>404 Not Found</h1>}/>
         </Switch>

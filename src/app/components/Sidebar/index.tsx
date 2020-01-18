@@ -1,6 +1,6 @@
 import { ScrollPanel } from 'primereact/scrollpanel';
 import { AppMenu } from 'app/components/AppMenu';
-import { createMenu } from 'app/containers/Dashboard/menu';
+import { createMenu } from './menu';
 import React from 'react';
 import Timeout = NodeJS.Timeout;
 
