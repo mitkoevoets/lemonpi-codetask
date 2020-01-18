@@ -40,6 +40,12 @@ export class AdvertisersContainer extends React.Component<AdvertisersContainer.P
     this.setState({ layoutMode: 'overlay' });
   }
 
+  componentDidMount() {
+    const { actions } = this.props;
+
+    actions.init();
+  }
+
   render() {
     const {} = this.props;
 
@@ -51,7 +57,7 @@ export class AdvertisersContainer extends React.Component<AdvertisersContainer.P
             <DataTable value={this.props.model.advertisers} paginatorPosition="both" selectionMode="single"
                        header="List of Cars" paginator={true} rows={10}
                        responsive={true} onSelectionChange={event => this.setState({dataTableSelection: event.value})}>
-              <Column field="vin" header="Vin" sortable={true}/>
+              <Column field="advertiser" header="Advertiser" sortable={true}/>
               <Column field="year" header="Year" sortable={true}/>
               <Column field="brand" header="Brand" sortable={true}/>
               <Column field="color" header="Color" sortable={true}/>

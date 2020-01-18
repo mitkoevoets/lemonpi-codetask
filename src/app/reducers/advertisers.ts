@@ -8,6 +8,12 @@ const initialState: AdvertisersModel = {
 
 export const advertisersReducer = handleActions<AdvertisersModel>(
   {
+    [AdvertisersActions.Type.SET_LOADING]: (state, action) => {
+      return {
+        ...state,
+        loading: true,
+      };
+    },
     [AdvertisersActions.Type.UPDATE]: (state, action) => {
       return {
         ...state,

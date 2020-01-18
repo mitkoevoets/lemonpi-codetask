@@ -14,7 +14,11 @@ export namespace AdvertisersActions {
     return async (dispatch: any) => {
       dispatch(setLoading());
 
-      axios.get(process.env.BACKEND_API_BASEURL + '/grow-cycle/init-index').then((response) => {
+      axios.get('https://5b87a97d35589600143c1424.mockapi.io/api/v1/advertisers').then((response) => {
+        console.log(response.data)
+        // const advertisers = response.data.map(() {
+        //   name: data.name
+        // }
         if (response) {
             dispatch(update(
               { },
