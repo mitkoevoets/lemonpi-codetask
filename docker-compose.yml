@@ -1,0 +1,14 @@
+version: '3'
+services:
+  app:
+    container_name: cobra_ui
+    build: .
+    environment:
+      - OPTIMUS_API_URL=http://192.168.144.1:7000
+    ports:
+      - 3000:3000
+    expose:
+      - 3000
+    volumes:
+      - ./:/home/node
+    command: npm run start

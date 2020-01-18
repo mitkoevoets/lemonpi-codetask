@@ -1,0 +1,28 @@
+{
+  "extends": ["tslint:latest", "tslint-react"],
+  "defaultSeverity": "warning",
+  "rules": {
+    "jsx-no-lambda": false,
+    "no-submodule-imports": false,
+    "ordered-imports": false,
+    "interface-name": false,
+    "object-literal-sort-keys": false,
+    "no-implicit-dependencies": false,
+    "no-namespace": false,
+    "no-empty-interface": false,
+    "member-access": false,
+    "jsx-no-multiline-js": false,
+    "quotemark": false,
+    "no-trailing-whitespace": false,
+    "jsx-alignment": false,
+    "jsx-boolean-value": false,
+    "no-duplicate-imports": false
+  },
+  "linterOptions": {
+    "exclude": [
+      "config/**/*.js",
+      "node_modules/**/*.ts",
+      "coverage/lcov-report/*.js"
+    ]
+  }
+}
