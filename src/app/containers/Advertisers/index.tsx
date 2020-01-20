@@ -9,6 +9,7 @@ import { omit } from 'app/utils/omit';
 import { AdvertisersModel } from 'app/models/AdvertisersModel';
 import { Advertiser, AdvertisersActions } from 'app/actions/advertisers';
 import { RootState } from 'app/reducers';
+import { ProgressBar } from 'primereact/progressbar';
 
 const PageWrapper = styled.div`
   //box-sizing: border-box;
@@ -46,9 +47,12 @@ export class AdvertisersContainer extends React.Component<AdvertisersContainer.P
     actions.init();
   }
 
-
-  render() {
+  dataTable() {
     const { model } = this.props;
+
+    if (model.loading) {
+      return (<ProgressBar mode="indeterminate"/>);
+    }
 
     const dateSortFunction = (e: any) => {
       return [...model.advertisers].sort(
@@ -68,20 +72,26 @@ export class AdvertisersContainer extends React.Component<AdvertisersContainer.P
     };
 
     return (
+      <DataTable value={model.advertisers} paginatorPosition="both" selectionMode="single"
+                 header="List of Cars" paginator={true} rows={10}
+                 responsive={true}
+                 onSelectionChange={(event) => this.setState({ dataTableSelection: event.value })}>
+        <Column field="name" header="Advertiser" sortable={true}/>
+        <Column field="createdAt" header="Creation Date" sortable={true} sortFunction={dateSortFunction}/>
+        <Column field="campaigns" header="# Campaigns" sortable={true}/>
+        <Column field="impressions" header="Impressions" sortable={true}/>
+        <Column field="clicks" header="Clicks" sortable={true}/>
+      </DataTable>
+    );
+  }
+
+  render() {
+    return (
       <PageWrapper>
         <div className="p-col-12">
           <div className="card card-w-title">
             <h1>Advertisers</h1>
-            <DataTable value={model.advertisers} paginatorPosition="both" selectionMode="single"
-                       header="List of Cars" paginator={true} rows={10}
-                       responsive={true}
-                       onSelectionChange={(event) => this.setState({ dataTableSelection: event.value })}>
-              <Column field="name" header="Advertiser" sortable={true}/>
-              <Column field="createdAt" header="Creation Date" sortable={true} sortFunction={dateSortFunction}/>
-              <Column field="campaigns" header="# Campaigns" sortable={true}/>
-              <Column field="impressions" header="Impressions" sortable={true}/>
-              <Column field="clicks" header="Clicks" sortable={true}/>
-            </DataTable>
+            {this.dataTable()}
           </div>
         </div>
       </PageWrapper>

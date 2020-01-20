@@ -1,5 +1,6 @@
 import { createAction } from 'redux-actions';
 import axios from 'axios';
+import { delay } from 'app/utils/delay';
 
 export interface AdvertiserData {
   id: string;
@@ -36,6 +37,8 @@ export namespace AdvertisersActions {
     return async (dispatch: any) => {
       dispatch(setLoading());
 
+      // Make 1,5 second delay to show loader for lemon pi code task
+      await delay(1500);
 
       function getAdvertisers() {
         return axios.get('https://5b87a97d35589600143c1424.mockapi.io/api/v1/advertisers');

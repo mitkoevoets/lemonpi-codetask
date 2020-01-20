@@ -4,6 +4,7 @@ import { AdvertisersActions } from 'app/actions/advertisers';
 
 const initialState: AdvertisersModel = {
   advertisers: [],
+  loading: false,
 };
 
 export const advertisersReducer = handleActions<AdvertisersModel>(
