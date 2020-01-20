@@ -78,7 +78,7 @@ export class AdvertisersContainer extends React.Component<AdvertisersContainer.P
                        onSelectionChange={(event) => this.setState({ dataTableSelection: event.value })}>
               <Column field="name" header="Advertiser" sortable={true}/>
               <Column field="createdAt" header="Creation Date" sortable={true} sortFunction={dateSortFunction}/>
-              <Column field="campaings" header="# Campaigns" sortable={true}/>
+              <Column field="campaigns" header="# Campaigns" sortable={true}/>
               <Column field="impressions" header="Impressions" sortable={true}/>
               <Column field="clicks" header="Clicks" sortable={true}/>
             </DataTable>
