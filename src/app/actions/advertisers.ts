@@ -17,6 +17,7 @@ export interface AdvertiserStatisticsData {
 export interface Advertiser {
   name: string;
   createdAt: string;
+  createdAtUNIX: number;
   campaigns: number;
   impressions: number;
   clicks: number;
@@ -51,9 +52,13 @@ export namespace AdvertisersActions {
               advertisers: advertisersResponse.data.map((advertiserData: AdvertiserData): Advertiser => {
                 const advertiserStatisticsData: AdvertiserStatisticsData = advertiserStatisticsResponse.data.find(
                   (i: AdvertiserStatisticsData) => i.advertiserId === advertiserData.id);
+
+                const createdAt: Date = new Date(advertiserData.createdAt);
+
                 return {
                   name: advertiserData.name,
-                  createdAt: advertiserData.createdAt,
+                  createdAt: createdAt.toLocaleString(),
+                  createdAtUNIX: createdAt.getTime(),
                   campaigns: advertiserData.campaignIds.length,
                   clicks: advertiserStatisticsData ? advertiserStatisticsData.clicks : 0,
                   impressions: advertiserStatisticsData ? advertiserStatisticsData.impressions : 0,

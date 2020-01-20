@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { RouteComponentProps } from 'react-router';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { omit } from 'app/utils/omit';
 import { AdvertisersModel } from 'app/models/AdvertisersModel';
-import { AdvertisersActions } from 'app/actions/advertisers';
+import { Advertiser, AdvertisersActions } from 'app/actions/advertisers';
 import { RootState } from 'app/reducers';
 
 const PageWrapper = styled.div`
@@ -46,21 +46,41 @@ export class AdvertisersContainer extends React.Component<AdvertisersContainer.P
     actions.init();
   }
 
+
   render() {
-    const {} = this.props;
+    const { model } = this.props;
+
+    const dateSortFunction = (e: any) => {
+      return [...model.advertisers].sort(
+        (advertiserA: Advertiser, advertiserB: Advertiser): number => {
+          let result: number = 0;
+
+          if (advertiserA.createdAtUNIX > advertiserB.createdAtUNIX) {
+            result = 1;
+          }
+          if (advertiserA.createdAtUNIX < advertiserB.createdAtUNIX) {
+            result = -1;
+          }
+
+          return result * e.order;
+        },
+      );
+    };
 
     return (
       <PageWrapper>
         <div className="p-col-12">
           <div className="card card-w-title">
             <h1>Advertisers</h1>
-            <DataTable value={this.props.model.advertisers} paginatorPosition="both" selectionMode="single"
+            <DataTable value={model.advertisers} paginatorPosition="both" selectionMode="single"
                        header="List of Cars" paginator={true} rows={10}
-                       responsive={true} onSelectionChange={event => this.setState({dataTableSelection: event.value})}>
-              <Column field="advertiser" header="Advertiser" sortable={true}/>
-              <Column field="year" header="Year" sortable={true}/>
-              <Column field="brand" header="Brand" sortable={true}/>
-              <Column field="color" header="Color" sortable={true}/>
+                       responsive={true}
+                       onSelectionChange={(event) => this.setState({ dataTableSelection: event.value })}>
+              <Column field="name" header="Advertiser" sortable={true}/>
+              <Column field="createdAt" header="Creation Date" sortable={true} sortFunction={dateSortFunction}/>
+              <Column field="campaings" header="# Campaigns" sortable={true}/>
+              <Column field="impressions" header="Impressions" sortable={true}/>
+              <Column field="clicks" header="Clicks" sortable={true}/>
             </DataTable>
           </div>
         </div>
