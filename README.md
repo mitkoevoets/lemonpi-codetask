@@ -9,3 +9,4 @@ It was not possible to finish everything in the limited time I had:
 
 - Error handling is unfinished. I've only added the page notification elements, but didn't have time to add the error handling functionality.
 - I didn't have the time to do the last exercise 6, which was about configuring/saving the sorting through the url.
+- Normally I would add validation on the content of the response to the api requests to make sure the right response is coming back.
